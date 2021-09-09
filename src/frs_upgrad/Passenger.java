@@ -30,7 +30,6 @@ public class Passenger {
         idCounter = 0;
     }
 
-    //constructor
     public Passenger(String addressStreet, String addressCity,
                      String addressState, String contactName, String contactPhone,
                      String contactEmail) {
