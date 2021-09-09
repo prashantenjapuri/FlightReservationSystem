@@ -1,6 +1,6 @@
 package frs_upgrad;
 
-public class Ticket {
+public abstract class Ticket {
     private static int idCounter;
     private int id;
     private int pnrNumber;
@@ -39,6 +39,7 @@ public class Ticket {
         this.passenger = passenger;
         this.flight = flight;
 
+        this.toIncreaseSeatsBooked();
     }
 
     //getters and setters
@@ -138,4 +139,66 @@ public class Ticket {
         this.flight = flight;
     }
 
+    //methods
+    public String getDuration(){
+
+        int diffInTime,returnHrs,returnMinutes;
+        String output = "";
+
+        //split time
+        String[] arrOfDep = timeOfDeparture.split(":", 2);
+        String[] arrOfArr = timeOfArrival.split(":", 2);
+
+        //for Arrival
+        int hrsArrival = Integer.parseInt(arrOfArr[0])*60;
+        int minutesArrival = Integer.parseInt(arrOfArr[1]);
+        int totalTimeArrival = hrsArrival+minutesArrival;
+
+        //for Departure
+        int hrsDeparture = Integer.parseInt(arrOfDep[0])*60;
+        int minutesDeparture = Integer.parseInt(arrOfDep[1]);
+        int totalTimeDeparture = hrsDeparture+minutesDeparture;
+
+        if(dateOfDeparture.equals(dateOfArrival)){
+            //difference
+            diffInTime = totalTimeArrival-totalTimeDeparture;
+            //returning values
+            returnHrs = diffInTime/60;
+            returnMinutes = diffInTime%60;
+            output = returnHrs + " Hours " + returnMinutes + " minutes";
+        }else if((hrsArrival < hrsDeparture)){
+            //difference
+            diffInTime = 1440-(totalTimeDeparture-totalTimeArrival);
+            //returning values
+            returnHrs = diffInTime/60;
+            returnMinutes = diffInTime%60;
+            output = returnHrs + " Hours " + returnMinutes + " minutes";
+        }else if((hrsArrival > hrsDeparture)){
+            //difference
+            diffInTime = 1440+(totalTimeArrival-totalTimeDeparture);
+            //returning values
+            returnHrs = diffInTime/60;
+            returnMinutes = diffInTime%60;
+            output = returnHrs + " Hours " + returnMinutes + " minutes";
+        }else{
+            output= "invalid input";
+        }
+        return output;
+    };
+
+    public String checkTicketStatus(){
+        if(this.isCancelled){
+            return "ticket is cancelled";
+        }else {
+            return "ticket is booked";
+        }
+    };
+
+    public void cancelTicket(){
+        this.isCancelled=true;
+    };
+
+    void toIncreaseSeatsBooked(){
+        this.flight.setNoOfSeatsBooked(this.id);
+    }
 }

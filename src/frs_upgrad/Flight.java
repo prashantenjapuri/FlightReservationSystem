@@ -47,5 +47,22 @@ public class Flight {
         this.noOfSeatsBooked = noOfSeatsBooked;
     }
 
+    //methods
+    public String getFlightDetails(){
+        return this.flightNumber + ", " + this.airlineName;
+    };
+
+    public boolean checkAvailabilityOfSeats(){
+        if(noOfSeatsBooked<capacity){
+            return true;
+        }else {
+            return false;
+        }
+    };
+
+    public void updateNoOfSeatsBooked(){
+        System.out.println("Booked Seats count updated");
+        System.out.println("Now booked seats count is " +this.noOfSeatsBooked);
+    };
 
 }
