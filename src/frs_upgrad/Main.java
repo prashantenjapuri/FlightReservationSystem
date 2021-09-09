@@ -18,5 +18,15 @@ public class Main {
                 "13/09/2021","23:00","08:50",145.15f,"A2312",
                 false,newPassenger,newFlight,"Biryani","Yes","Waffers");
 
+
+        printTicketDetails(touristTicket1);
+        printTicketDetails(regTicket1);
+//        touristTicket1.addTouristLocation(new String[]{"one","two","three"});
+//        System.out.println(Arrays.toString(touristTicket1.getTouristLocation()));
+//        touristTicket1.removeTouristLocation();
+//        System.out.println(Arrays.toString(touristTicket1.getTouristLocation()));
+    }
+    public static void printTicketDetails(Ticket ticket){
+        System.out.println(ticket.getPnrNumber());
     }
 }
